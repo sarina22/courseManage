@@ -1,0 +1,6 @@
+sn,firstname,MiddleName,Surname,Email,DOB,Address,Nationality,contact_number,Password,Level,address2,qualification,status,course_id
+1,a,,n1,2222,3.00E+00,s1,nepali,123,,1,1,12,dormant,c12
+2,b,,n2,343434,3.40E+01,s2,nepali,123,,2,333,23,live,c12
+3,c,,n3,2323,4.30E+01,s3,nepali,123,,3,3,32,provisional,c12
+4,d,,n4,3434,3.40E+01,s4,nepali,123,,4,24,23,provisional,c12
+5,e,,n5,34434,w1232,s5,nepali,123,,5,234,23,live,c12

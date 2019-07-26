@@ -1,0 +1,182 @@
+/* 
+ NAME: NEETU DAS
+ ID: 18406487
+ WEEk: 9
+ ACTIVITY: 9
+ DATE: December 29, 2018
+ */
+
+--@E:\CSY2038_Database_ND\18406487_joins.txt;
+
+--CARTESIAN PRODUCT
+
+--DESCRIBING TABLES subject_areas and courses
+DESC subject_areas;
+DESC courses;
+
+--QUERYING TO LIST MATCHED ITEMS OF subject_areas and courses IN THOSE SUBJECT AREAS USING JOIN
+SELECT sa.subject_id, sa.subject_name, c.course_id, c.title
+FROM subject_areas sa
+JOIN courses c
+ON sa.subject_id = c.subject_id;
+--9 rows selected
+
+--QUERYING TO LIST MATCHED ITEMS OF subject_areas and courses IN THOSE SUBJECT AREAS WITHOUT JOIN
+SELECT sa.subject_id, sa.subject_name, c.course_id, c.title
+FROM subject_areas sa, courses c;
+--36 rows selected, No
+
+--DESCRIBING TABLES instructors and offerings
+DESC instructors;
+DESC offerings;
+
+--QUERYING TO LIST THE courses by title and instructors by name WHO HAVE TAUGHT THEM
+SELECT i.instructor_id, i.instructor_name, o.offering_id, c.course_id, c.title
+FROM instructors i
+JOIN offerings o
+ON i.instructor_id = o.instructor_id
+JOIN courses c
+ON c.course_id = o.course_id
+ORDER BY instructor_id;
+
+--QUERYING TO LIST THE courses by title and instructors by name WHO HAVE TAUGHT THEM INCLUDING the cost of courses.
+--ORDER BY cost of courses
+SELECT i.instructor_id, i.instructor_name, o.offering_id, c.course_id, c.title, c.cost
+FROM instructors i
+JOIN offerings o
+ON i.instructor_id = o.instructor_id
+JOIN courses c
+ON c.course_id = o.course_id
+ORDER BY c.cost;
+
+--FORMATTING the title COLUMN TO 10 CHARACTERS
+COLUMN title FORMAT A10
+
+--DESCRIBING TABLES student and attendance
+DESC students;
+DESC attendances;
+
+--QUERYING TO LIST ALL THE STUDENTS WHETHER OR NOT THEY HAVE ATTENDED ANYTHING
+--LEFT JOIN
+SELECT s.student_id, s.student_firstname, s.student_surname, a.evaluation
+FROM attendance a 
+LEFT JOIN students s
+ON s.student_id = a.student_id;
+
+--RIGHT JOIN
+SELECT s.student_id, s.student_firstname, s.student_surname, a.evaluation
+FROM students s  
+RIGHT JOIN attendance a 
+ON s.student_id = a.student_id;
+--31 rows selected
+
+--DESCRIBING TABLE courses, offerings and sites
+DESC courses;
+DESC offerings;
+DESC sites;
+
+--QUERYING ALL COURSES, OFFERINGS AND SITES using FULL OUTER JOIN
+SELECT c.course_id, c.title, o.offering_id, s.site_id
+FROM courses c
+FULL OUTER JOIN offerings o
+ON c.course_id = o.course_id
+FULL OUTER JOIN sites s
+ON s.site_id = o.site_id;
+--ADA and DOS
+--19 rows selected
+
+--DESCRIBING TABLES subject_areas, courses, offerings and sites
+DESC subject_areas;
+DESC sites;
+
+--BONUS ACTIVITIES
+--QUERYING LOCATIONS OF ALL SITES WHERE SUBJECT_AREAS BY NAME ARE DELIVERED, INCLUDING ALL SITES EVEN IF THEY DON'T HAVE ANYTHING DELIVERED AT THEM
+SELECT s.site_id, s.location, sa.subject_id, sa.subject_name, o.offering_id, c.course_id, c.title
+FROM subject_areas sa 
+JOIN courses c
+ON c.subject_id =sa.subject_id
+JOIN offerings o
+ON c.course_id=o.course_id
+RIGHT JOIN sites s
+ON s.site_id = o.site_id;
+
+--OR
+
+SELECT s.site_id, s.location, sa.subject_id, sa.subject_name, o.offering_id, c.course_id, c.title
+FROM sites s
+LEFT JOIN (
+	offerings o JOIN courses c
+	ON c.course_id = o.course_id
+	JOIN subject_areas sa
+    ON sa.subject_id = c.subject_id
+)
+ON s.site_id = o.site_id;
+--16 rows selected
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

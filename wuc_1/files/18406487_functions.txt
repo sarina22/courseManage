@@ -1,0 +1,101 @@
+/* 
+ NAME: NEETU DAS
+ ID: 18406487
+ WEEk: 8
+ ACTIVITY: 8
+ DATE: December 22, 2018
+ */
+
+--@E:\CSY2038_Database_ND\18406487_functions.txt;
+
+--VIEWING THE instructor table
+DESC instructors;
+
+--QUERYING instructors TABLE TO FIND THE NAME OF INSTRUCTORS OF THE GIVEN SALARY
+SELECT instructor_id, instructor_name, salary 
+FROM instructors
+WHERE salary IN (2000, 2500, 3000);
+--3 rows (TUCKER, LODGE, MONROE) displayed
+
+--QUERYING instructors TABLE TO FIND THE NAME OF THE INSTRUCTORS STARTING WITH S
+SELECT instructor_id, instructor_name
+FROM instructors
+WHERE instructor_name LIKE 'S%';
+--3 rows (Sparks, Steel, Shelley) displayed.
+
+--QUERYING instructors TABLE TO FIND THE NAME OF INSTRUCTORS OF THE GIVEN SALARY
+SELECT instructor_id, instructor_name, salary 
+FROM instructors
+WHERE salary BETWEEN 2000 AND 2999;
+--2 rows (TUCKER, LODGE) displayed
+
+--LISTING ALL THE TABLES
+SELECT T_NAME FROM TAB;
+
+--VIEWING THE STRUCTURE OF attendance TABLE
+DESC attendance;
+
+--QUERYING THE attendance TABLE
+SELECT student_id, COUNT(offering_id)
+FROM attendance
+GROUP BY student_id;
+--18 rows displayed
+
+--QUERYING THE attendance TABLE TO LIST THE STUDENT_ID GREATER THAN 6000
+SELECT student_id, COUNT(offering_id)
+FROM attendance
+GROUP BY student_id
+HAVING student_id > 6000;
+--9 rows displayed
+
+--QUERYING THE attendance TABLE TO LIST THE STUDENTS WHO GAVE AN AVERAGE EVALUATION OF AT LEAST 4
+SELECT student_id, AVG(evaluation)
+FROM attendance
+GROUP BY student_id
+HAVING AVG(evaluation) >= 4;
+--9 rows displayed
+
+--VIEWING THE STRUCTURE OF attendance TABLE
+DESC attendance;
+
+--QUERYING THE attendance TABLE TO LIST THE TOTAL AMOUNT PAID BY THE STUDENTS FOR ALL COURSES ATTENDED
+SELECT student_id, SUM(amount_paid)
+FROM attendance
+GROUP BY student_id
+ORDER BY SUM(amount_paid) DESC;
+--18 rows displayed
+--7990
+
+--QUERYING THE attendance TABLE TO LIST THE TOTAL AMOUNT PAID BY THE STUDENTS FOR EACH OFFERING
+SELECT offering_id, SUM(amount_paid)
+FROM attendance
+GROUP BY offering_id
+ORDER BY 2 DESC;
+--9 rows displayed
+--1004 has the greatest total amount paid.
+
+--QUERYING THE attendance TABLE TO RETURN MINIMUM, MAXIMUM AND AVERAGE EVALUATION FOR COURSE OFFERINGS HAVING MIN EVALUATION OF LESS THAT 2.5
+SELECT MIN(evaluation), MAX(evaluation), AVG(evaluation)
+FROM attendance
+GROUP BY offering_id
+HAVING MIN(evaluation) < 2.5;
+--2 rows displayed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
